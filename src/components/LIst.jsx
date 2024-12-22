@@ -1,8 +1,6 @@
-import Movie from "./Movie";
-function List({className,children}) {
-  return (
-    <ul className={`list ${className?className: ""}`}>{children}</ul>
-  );
+import Movie from "./Movies/Movie";
+function List({ className, children }) {
+  return <ul className={`list ${className ? className : ""}`}>{children}</ul>;
 }
 
 export default List;

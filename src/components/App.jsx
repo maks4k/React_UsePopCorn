@@ -1,10 +1,10 @@
-import Navbar from "./Navbar";
+import Navbar from "./Nav/Navbar";
 import Box from "./Box";
 import List from "./LIst";
-import Details from "./Details";
-import Summarry from "./Summary";
-import Movie from "./Movie";
-import Watched from "./Watched";
+import Details from "./Watched/Details";
+import Summarry from "./Watched/Summary";
+import Movie from "./Movies/Movie";
+import Watched from "./Watched/Watched";
 import Error from "./Error";
 const tempMovieData = [
   {
@@ -59,7 +59,7 @@ function App() {
       <Navbar />
       <main className="main">
         <Box>
-        <Error/>
+          <Error />
           <List className="list-movies">
             <Movie />
           </List>
@@ -68,7 +68,7 @@ function App() {
           <Details />
           <Summarry />
           <List>
-           <Watched />
+            <Watched />
           </List>
         </Box>
       </main>
