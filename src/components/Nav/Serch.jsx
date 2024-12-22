@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Serch() {
+export function Serch() {
   return (
     <input className="search" type="text" placeholder="Search movies..." />
   )
 }
 
-export default Serch
+// export default Serch

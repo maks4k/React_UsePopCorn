@@ -1,6 +1,6 @@
-import Serch from "./Serch"
-import NumResults from "./NumResults"
-function Navbar() {
+import {Serch} from "./Serch"
+import {NumResults} from "./NumResults"
+export function Navbar() {
   return (
     <nav className="nav-bar">
     <div className="logo">
@@ -14,4 +14,4 @@ function Navbar() {
   )
 }
 
-export default Navbar
+// export default Navbar

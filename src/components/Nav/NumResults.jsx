@@ -1,6 +1,6 @@
 import React from 'react'
 
-function NumResults() {
+export function NumResults() {
   return (
     <p className="num-results">
     Found <strong>120</strong> results
@@ -8,4 +8,4 @@ function NumResults() {
   )
 }
 
-export default NumResults
+// export default NumResults

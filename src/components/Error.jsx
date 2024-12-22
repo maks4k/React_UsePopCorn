@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Error() {
+export function Error() {
   return (
     <p className="error">
     <span>⛔️</span> error
@@ -8,4 +8,4 @@ function Error() {
   )
 }
 
-export default Error
+// export default Error

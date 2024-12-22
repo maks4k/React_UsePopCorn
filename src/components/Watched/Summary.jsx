@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Summaty() {
+export function Summary() {
   return (
   
     <div className="summary">
@@ -27,4 +27,4 @@ function Summaty() {
   )
 }
 
-export default Summaty
+// export default Summaty

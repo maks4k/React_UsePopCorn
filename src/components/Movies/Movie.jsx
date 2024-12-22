@@ -1,20 +1,16 @@
+import React from "react";
+import {Box} from "../Box";
+import {Error} from "../Error";
+import {List} from "../List";
+import { MovieItem } from "./MovieItem";
 
-function Movie() {
+export function Movie() {
   return (
-    <li>
-    <img
-      src="https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg"
-      alt={`movie.Title poster`}
-    />
-    <h3>movie.Title</h3>
-    <div>
-      <p>
-        <span>🗓</span>
-        <span>2007</span>
-      </p>
-    </div>
-  </li>
-  )
+    <Box>
+      <Error />
+      <List className="list-movies">
+        <MovieItem />
+      </List>
+    </Box>
+  );
 }
-
-export default Movie

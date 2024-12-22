@@ -1,11 +1,9 @@
-import Navbar from "./Nav/Navbar";
-import Box from "./Box";
-import List from "./LIst";
-import Details from "./Watched/Details";
-import Summarry from "./Watched/Summary";
-import Movie from "./Movies/Movie";
-import Watched from "./Watched/Watched";
-import Error from "./Error";
+import { Navbar } from "./Nav";
+
+import {Movie} from "./Movies";
+
+import { Watched } from "./Watched";
+
 const tempMovieData = [
   {
     imdbID: "tt1375666",
@@ -58,19 +56,8 @@ function App() {
     <>
       <Navbar />
       <main className="main">
-        <Box>
-          <Error />
-          <List className="list-movies">
-            <Movie />
-          </List>
-        </Box>
-        <Box>
-          <Details />
-          <Summarry />
-          <List>
-            <Watched />
-          </List>
-        </Box>
+      <Movie/>
+       <Watched/>
       </main>
     </>
   );
