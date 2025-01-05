@@ -1,17 +1,21 @@
-import {Serch} from "./Serch"
+import {Search} from "./Search"
 import {NumResults} from "./NumResults"
-export function Navbar() {
+// import PropTypes from "prop-types"
+
+export function Navbar({onSearch,numResults}) {
   return (
     <nav className="nav-bar">
     <div className="logo">
       <span role="img">🍿</span>
       <h1>usePopcorn</h1>
     </div>
-  <Serch />
-  <NumResults />
+  <Search onSearch={onSearch} />
+  <NumResults  numResults={numResults}/>
     </nav>
     
   )
-}
+};
 
-// export default Navbar
+// Navbar.propTypes={
+//   onSearch:PropTypes.func.isRequired,
+// }

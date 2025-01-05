@@ -1,11 +1,12 @@
-import React from 'react'
+// import PropTypes from 'prop-types'
 
-export function NumResults() {
+export function NumResults({numResults}) {
   return (
     <p className="num-results">
-    Found <strong>120</strong> results
+    Found <strong>{numResults}</strong> results
   </p>
   )
 }
-
-// export default NumResults
+// NumResults.propTypes = {
+//   numResults: PropTypes.number.isRequired,
+// };
