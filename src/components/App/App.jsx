@@ -1,13 +1,14 @@
 import { Navbar } from "../Nav";
 
-import {Movie} from "../Movies";
+import { Movie } from "../Movies";
 
 import { Watched } from "../Watched";
 
-import {getMovies} from "./Api"; 
+import { getMovies } from "./Api";
 
 // import {debounce} from "lodash";
 import { useEffect, useRef, useState } from "react";
+// import { use } from "react";
 
 //там же варинат с дебаунс фукнцией
 //  const tempMovieData = [
@@ -57,7 +58,6 @@ import { useEffect, useRef, useState } from "react";
 //   },
 // ];
 
-
 //варинат с дебаунс функцией из библиотеки lodash
 // export function App() {
 //   const [numResults,setnumResults]=useState(0);
@@ -65,8 +65,8 @@ import { useEffect, useRef, useState } from "react";
 //   const searchHandler = debounce(async (value) => {
 //   const data = await getMovies(value);
 //   console.log(data);
-   
-//   setnumResults( data?.totalResults || 0)  
+
+//   setnumResults( data?.totalResults || 0)
 //   }, 2000); // Дебаунс на 2000 миллисекунд
 //     // Хук useEffect
 //   useEffect(() => {
@@ -85,39 +85,42 @@ import { useEffect, useRef, useState } from "react";
 //       </>
 //     );
 //   }
-  
-  export function App() {
-    const [numResults,setnumResults]=useState(0);
-    const [isLoading,setisLoading]=useState(false);//стейтавая переменная под загрузку cспинера
-    const [isError,setIsError]=useState(false);//стейтовая переменная под ошибку
-    // const [data]
-   const abortController=useRef(null)
-  
-    const searchHandler=async(value)=>{
-      if (abortController.current) {
-        abortController.current.abort();
-      }
-  const controler=new AbortController();
-  abortController.current=controler;
-  const data=await getMovies(value,controler,setisLoading,setIsError);
-  setnumResults( data?.totalResults || 0)
+
+export function App() {
+  const [numResults, setnumResults] = useState(0);
+  const [isLoading, setisLoading] = useState(false); //стейтавая переменная под загрузку cспинера
+  const [isError, setIsError] = useState(false); //стейтовая переменная под ошибку
+  const [movies, setMovies] = useState([]); //стейтовая перменная для отображения фильмов
+  // const [data]
+  const abortController = useRef(null);
+
+  const searchHandler = async (value) => {
+    if (abortController.current) {
+      abortController.current.abort();
     }
-      // Хук useEffect
-    useEffect(() => {
-        // Очистка функции debounce
+    const controler = new AbortController();
+    abortController.current = controler;
+    const data = await getMovies(value, controler, setisLoading, setIsError);
+    // isError && setMovies([]); //если появляется ошибка то приводи сетмувис у пустому масиву
+    data?.Search ? setMovies(data.Search) : setMovies([]); //обнуляем масив если data.Search пришел пустым
+    setnumResults(data?.totalResults || 0);
+  };
+  // Хук useEffect
+  useEffect(() => {
+    // Очистка функции debounce
     return () => {
       if (abortController.current) {
         abortController.current.abort();
       }
-        };
-      }, []);
-      return (
-        <>
-          <Navbar onSearch={searchHandler} numResults={numResults}/>
-          <main className="main">
-          <Movie isLoading={isLoading} isError={isError}/>
-           <Watched/>
-          </main>
-        </>
-      );
-    }
+    };
+  }, []);
+  return (
+    <>
+      <Navbar onSearch={searchHandler} numResults={numResults} />
+      <main className="main">
+        <Movie isLoading={isLoading} isError={isError} movies={movies} />
+        <Watched />
+      </main>
+    </>
+  );
+}

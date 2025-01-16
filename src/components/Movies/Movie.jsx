@@ -5,8 +5,9 @@ import { List } from "../List/List";
 import { MovieItem } from "./MovieItem";
 import { Spiner } from "../Spiner";
 
+
 // eslint-disable-next-line react/prop-types
-export function Movie({ isLoading, isError }) {
+export function Movie({ isLoading, isError ,movies}) {
   return (
     <Box>
       {isError && <Error />}
@@ -16,7 +17,8 @@ export function Movie({ isLoading, isError }) {
         </div>
       )}
       <List className="list-movies">
-        <MovieItem />
+      {movies&&movies.map((item,ind)=><MovieItem movie={item} key={ind}/>)}
+      {/* прошлись масивом для вывода всех фильмо на экран через компонент мувиайтем*/}
       </List>
     </Box>
   );
