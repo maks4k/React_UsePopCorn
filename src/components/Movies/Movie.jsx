@@ -11,7 +11,10 @@ export function Movie({isLoading}) {
   return (
     <Box>
       <Error />
-      {isLoading &&<Spiner/>}
+      {isLoading &&(
+      <div className="spiner__wrapper"><Spiner/>
+      </div>
+     )}
       <List className="list-movies">
         <MovieItem />
       </List>

@@ -9,7 +9,8 @@ import {getMovies} from "./Api";
 // import {debounce} from "lodash";
 import { useEffect, useRef, useState } from "react";
 
-// const tempMovieData = [
+//там же варинат с дебаунс фукнцией
+//  const tempMovieData = [
 //   {
 //     imdbID: "tt1375666",
 //     Title: "Inception",

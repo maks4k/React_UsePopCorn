@@ -1,6 +1,7 @@
-import React,{ useState } from 'react'
+import { useState } from 'react'
 // import PropTypes from 'prop-types';
 
+// eslint-disable-next-line react/prop-types
 export function Search({onSearch}) {
 const [value,setValue]=useState("");
 const changeHandler=(e)=>{
