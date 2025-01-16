@@ -24,9 +24,10 @@ const API_KEY = "7b943276";
 
 //abbortcontroler
 
-export const getMovies = async (query,controller,setisLoading) => {
+export const getMovies = async (query,controller,setisLoading,setIsError) => {
   try {
     setisLoading(true);
+    setIsError(false)
     const response = await fetch(
       `https://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`,{
         signal:controller.signal,
@@ -43,11 +44,12 @@ export const getMovies = async (query,controller,setisLoading) => {
  };//кейс если пришло слишком много фильмов(ограничение Api)
  return data;
   } catch (error) {
+    
     if (error.name==="AbbortError") {
      console.log("Предыдущий запрос отменен");
     }
     else{
-      console.log(error);
+      setIsError(true);
     }
   }
 };

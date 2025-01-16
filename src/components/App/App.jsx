@@ -88,7 +88,9 @@ import { useEffect, useRef, useState } from "react";
   
   export function App() {
     const [numResults,setnumResults]=useState(0);
-    const [isLoading,setisLoading]=useState(false);//стейтавая переменная под загрузку
+    const [isLoading,setisLoading]=useState(false);//стейтавая переменная под загрузку cспинера
+    const [isError,setIsError]=useState(false);//стейтовая переменная под ошибку
+    // const [data]
    const abortController=useRef(null)
   
     const searchHandler=async(value)=>{
@@ -97,7 +99,7 @@ import { useEffect, useRef, useState } from "react";
       }
   const controler=new AbortController();
   abortController.current=controler;
-  const data=await getMovies(value,controler,setisLoading);
+  const data=await getMovies(value,controler,setisLoading,setIsError);
   setnumResults( data?.totalResults || 0)
     }
       // Хук useEffect
@@ -113,7 +115,7 @@ import { useEffect, useRef, useState } from "react";
         <>
           <Navbar onSearch={searchHandler} numResults={numResults}/>
           <main className="main">
-          <Movie isLoading={isLoading}/>
+          <Movie isLoading={isLoading} isError={isError}/>
            <Watched/>
           </main>
         </>
