@@ -87,10 +87,11 @@ import { useEffect, useRef, useState } from "react";
 //   }
 
 export function App() {
-  const [numResults, setnumResults] = useState(0);
+  const [numResults, setnumResults] = useState(0);//стейтовая перменная для отоброжения кол-во фильмов
   const [isLoading, setisLoading] = useState(false); //стейтавая переменная под загрузку cспинера
   const [isError, setIsError] = useState(false); //стейтовая переменная под ошибку
   const [movies, setMovies] = useState([]); //стейтовая перменная для отображения фильмов
+  const [activeMovie,setIsActiveMovie]=useState (null)//стейтовая перменная для подсветки выбраного фильма и куда будет сохраняться id 
   // const [data]
   const abortController = useRef(null);
 
@@ -129,8 +130,8 @@ export function App() {
     <>
       <Navbar onSearch={searchHandler} numResults={numResults} />
       <main className="main">
-        <MovieBlock isLoading={isLoading} isError={isError} movies={movies} />
-        <WatchedBlock />
+        <MovieBlock isLoading={isLoading} isError={isError} movies={movies} activeMovie={activeMovie} setIsActiveMovie={setIsActiveMovie}/>
+        <WatchedBlock id={activeMovie} />
       </main>
     </>
   );

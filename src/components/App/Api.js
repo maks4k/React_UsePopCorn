@@ -86,3 +86,23 @@ export const getMovies = async (
     }
   }
 };
+
+export const getMovieDescription = async (id) => {
+  try {
+    const response = await fetch(
+      `https://www.omdbapi.com/?apikey=${API_KEY}&i=${id}`,
+    );
+    // console.log(responce);
+    if (!response.ok) {
+      throw new Error("Ошибка ответа с сервера");
+    }
+    const data = await response.json();
+    if (data.Response === "False") {
+      throw new Error("Не смогли найти этот фильм 😢");
+    } //кейс если пришло слишком много фильмов(ограничение Api)
+    return data;
+  } catch (error) {
+    console.log(error);
+    
+  }
+};

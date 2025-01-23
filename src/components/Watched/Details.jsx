@@ -1,4 +1,11 @@
-export function Details() {
+import {getMovieDescription} from "../App/api";
+
+
+
+export function Details({id}) {
+  getMovieDescription(id);
+
+
   return (
     <div className="details">
       <header>
