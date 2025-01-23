@@ -1,1 +1,1 @@
-export {Watched} from "./Watched"
+export {WatchedBlock} from "./WatchedBlock"

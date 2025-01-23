@@ -1,7 +1,9 @@
+
+
 // eslint-disable-next-line react/prop-types
-export function MovieItem({movie}) {
+export function MovieItem({movie,isActive,setIsActiveMovie}) {
   return (
-    <li>
+    <li onClick={()=>setIsActiveMovie(movie.imdbID)} className={isActive?"active":""}>
       <img
         // eslint-disable-next-line react/prop-types
         src={movie.Poster} 

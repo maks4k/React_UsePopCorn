@@ -1,8 +1,8 @@
 import { Navbar } from "../Nav";
 
-import { Movie } from "../Movies";
+import { MovieBlock } from "../Movies";
 
-import { Watched } from "../Watched";
+import { WatchedBlock } from "../Watched";
 
 import { getMovies } from "./Api";
 
@@ -94,15 +94,26 @@ export function App() {
   // const [data]
   const abortController = useRef(null);
 
+
+
+//функция работающая со строкой поиска ,аборт функция и так далее
   const searchHandler = async (value) => {
-    if (abortController.current) {
+    if(!value){setIsError(false);
+      setnumResults(0);
+      return
+    }
+    else if (abortController.current) {
       abortController.current.abort();
     }
     const controler = new AbortController();
     abortController.current = controler;
+    setisLoading(true);
+    setIsError(false)
     const data = await getMovies(value, controler, setisLoading, setIsError);
+    setisLoading(false);
     // isError && setMovies([]); //если появляется ошибка то приводи сетмувис у пустому масиву
-    data?.Search ? setMovies(data.Search) : setMovies([]); //обнуляем масив если data.Search пришел пустым
+    !data?setIsError(true):setIsError(false);//если не какая дата не пришла активируем ошибку
+    data?.Search ? setMovies(data.Search) : setMovies([]); //обнуляем масив если data.Search пришел пустым 
     setnumResults(data?.totalResults || 0);
   };
   // Хук useEffect
@@ -118,8 +129,8 @@ export function App() {
     <>
       <Navbar onSearch={searchHandler} numResults={numResults} />
       <main className="main">
-        <Movie isLoading={isLoading} isError={isError} movies={movies} />
-        <Watched />
+        <MovieBlock isLoading={isLoading} isError={isError} movies={movies} />
+        <WatchedBlock />
       </main>
     </>
   );

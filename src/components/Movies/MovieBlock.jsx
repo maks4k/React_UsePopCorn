@@ -4,10 +4,11 @@ import { Error } from "../Erorr/Error";
 import { List } from "../List/List";
 import { MovieItem } from "./MovieItem";
 import { Spiner } from "../Spiner";
-
+import { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
-export function Movie({ isLoading, isError ,movies}) {
+export function MovieBlock({ isLoading, isError, movies }) {
+  const [activeMovie,setIsActiveMovie]=useState (null)
   return (
     <Box>
       {isError && <Error />}
@@ -17,8 +18,9 @@ export function Movie({ isLoading, isError ,movies}) {
         </div>
       )}
       <List className="list-movies">
-      {movies&&movies.map((item,ind)=><MovieItem movie={item} key={ind}/>)}
-      {/* прошлись масивом для вывода всех фильмо на экран через компонент мувиайтем*/}
+        {movies &&
+          movies.map((item) => <MovieItem movie={item} key={item.imdbID} isActive={activeMovie===item.imdbID ? true : false} setIsActiveMovie={setIsActiveMovie} />)}
+        {/* прошлись масивом для вывода всех фильмо на экран через компонент мувиайтем*/}
       </List>
     </Box>
   );
