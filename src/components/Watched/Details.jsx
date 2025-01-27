@@ -1,23 +1,39 @@
-import {getMovieDescription} from "../App/api";
+import { useEffect, useState } from "react";
+import { getMovieDescription } from "../App/Api";
+import { Spiner } from "../Spiner";
 
-
-
-export function Details({id}) {
-  getMovieDescription(id);
-
-
-  return (
+// eslint-disable-next-line react/prop-types
+export function Details({ id }) {
+  const [description, setDescription] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    setIsLoading(true);
+    getMovieDescription(id).then((data) => {
+      console.log(data);
+      setDescription(data);
+      setIsLoading(false);
+    });
+  }, [id]);
+//если слодинг отрисуй спинер иначе отрису дискрипшен-дитаилс
+  return isLoading ? (
+    <div className="spiner__wrapper">
+      <Spiner />
+    </div>
+  ) : (
     <div className="details">
+      {/* {id&&<Spiner/>} */}
       <header>
         <button className="btn-back">&larr;</button>
-        <img src="https://m.media-amazon.com/images/M/MV5BMDFhNzU4MTMtYzZmNS00ZDEzLTg2MjQtYmUzZDA1ZWU4OTkzXkEyXkFqcGdeQXVyNDQ2MTMzODA@._V1_SX300.jpg" />
+        <img src={description?.Poster} />
         <div className="details-overview">
-          <h2>title</h2>
-          <p>16 Jul 2010 &bull; 148 min</p>
-          <p>Action, Adventure, Sci-fi</p>
+          <h2>{description?.Title}</h2>
+          <p>
+            {description?.Released} &bull; {description?.Runtime}
+          </p>
+          <p>{description?.Genre}</p>
           <p>
             <span>⭐️</span>
-            8.9 IMDb rating
+            {description?.imdbRating}IMDb rating
           </p>
         </div>
       </header>
@@ -74,10 +90,10 @@ export function Details({id}) {
         </div>
         <div className="details-overview">
           <p>
-            <em>activeMovie.Plot</em>
+            <em>{description?.Plot}</em>
           </p>
-          <p>Starring actors: activeMovie.Actors</p>
-          <p>Directed by: activeMovie.Director</p>
+          <p>Starring actors: {description?.Actors}</p>
+          <p>Directed by: {description?.Director}</p>
         </div>
       </section>
     </div>

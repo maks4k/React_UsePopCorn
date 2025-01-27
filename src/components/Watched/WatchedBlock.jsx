@@ -4,15 +4,19 @@ import { List } from "../List/List";
 import { Details } from "./Details";
 import { Summary } from "./Summary";
 import { WatchedItem } from "./WatchedItem";
+import {Spiner} from "../Spiner"
 
 export function WatchedBlock({id}) {
   return (
     <Box>
-     {id&&<Details id={id} />} 
+      {/* детаилс не отрендариться если не придет id */}
+     {id&&<Details id={id} />}
+     {!id&&
+     <>
       <Summary />
       <List>
         <WatchedItem />
-      </List>
+      </List></>}
     </Box>
   );
 }

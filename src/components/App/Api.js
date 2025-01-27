@@ -86,7 +86,7 @@ export const getMovies = async (
     }
   }
 };
-
+//запрос на то ч то бы отоброзить подробное инфо о фильме
 export const getMovieDescription = async (id) => {
   try {
     const response = await fetch(
