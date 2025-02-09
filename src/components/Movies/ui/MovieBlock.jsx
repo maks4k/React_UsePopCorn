@@ -1,10 +1,9 @@
 // import React from "react";
-import { Box } from "../Box/Box";
-import { Error } from "../Erorr/Error";
-import { List } from "../List/List";
+import { Box } from "../../Box/ui/Box";
+import { Error } from "../../Error/ui/Error";
+import { List } from "../../List/ui/List";
 import { MovieItem } from "./MovieItem";
-import { Spiner } from "../Spiner";
-
+import { Spiner } from "../../Spiner";
 
 // eslint-disable-next-line react/prop-types
 export function MovieBlock({

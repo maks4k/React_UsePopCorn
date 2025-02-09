@@ -1,13 +1,14 @@
-import { Navbar } from "../Nav";
+import { Navbar } from "../../Nav";
 
-import { MovieBlock } from "../Movies";
+import { MovieBlock } from "../../Movies";
 
-import { WatchedBlock } from "../Watched";
+import { WatchedBlock } from "../../Watched";
+import { useGetMovie } from "../model/useGetMove";
 
-import { getMovies } from "./Api";
+// import { getMovies } from "../Api";
 
-// import {debounce} from "lodash";
-import { useEffect, useRef, useState } from "react";
+// // import {debounce} from "lodash";
+// import { useEffect, useRef, useState } from "react";
 // import { use } from "react";
 
 //там же варинат с дебаунс фукнцией
@@ -87,45 +88,9 @@ import { useEffect, useRef, useState } from "react";
 //   }
 
 export function App() {
-  const [numResults, setnumResults] = useState(0);//стейтовая перменная для отоброжения кол-во фильмов
-  const [isLoading, setisLoading] = useState(false); //стейтавая переменная под загрузку cспинера
-  const [isError, setIsError] = useState(false); //стейтовая переменная под ошибку
-  const [movies, setMovies] = useState([]); //стейтовая перменная для отображения фильмов
-  const [activeMovie,setIsActiveMovie]=useState (null)//стейтовая перменная для подсветки выбраного фильма и куда будет сохраняться id 
-  // const [data]
-  const abortController = useRef(null);
-
-
-
-//функция работающая со строкой поиска ,аборт функция и так далее
-  const searchHandler = async (value) => {
-    if(!value){setIsError(false);
-      setnumResults(0);
-      return
-    }
-    else if (abortController.current) {
-      abortController.current.abort();
-    }
-    const controler = new AbortController();
-    abortController.current = controler;
-    setisLoading(true);
-    setIsError(false)
-    const data = await getMovies(value, controler, setisLoading, setIsError);
-    setisLoading(false);
-    // isError && setMovies([]); //если появляется ошибка то приводи сетмувис у пустому масиву
-    !data?setIsError(true):setIsError(false);//если не какая дата не пришла активируем ошибку
-    data?.Search ? setMovies(data.Search) : setMovies([]); //обнуляем масив если data.Search пришел пустым 
-    setnumResults(data?.totalResults || 0);
-  };
-  // Хук useEffect
-  useEffect(() => {
-    // Очистка функции debounce
-    return () => {
-      if (abortController.current) {
-        abortController.current.abort();
-      }
-    };
-  }, []);
+const{
+  searchHandler,numResults,isLoading,isError,movies,activeMovie,setIsActiveMovie
+}= useGetMovie();//имортировли кастомный хук
   return (
     <>
       <Navbar onSearch={searchHandler} numResults={numResults} />

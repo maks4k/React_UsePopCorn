@@ -1,4 +1,4 @@
-const API_KEY = "7b943276";
+// const API_KEY = "7b943276";
 
 //варинат с дебаунс функцией из библиотеки lodash
 // export const getMovies = async (query) => {
@@ -66,7 +66,7 @@ export const getMovies = async (
 ) => {
   try {
     const response = await fetch(
-      `https://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`,
+      `/api?apikey=${import.meta.env.VITE_API_KEY}&s=${query}`,
       {
         signal: controller.signal,
       }
@@ -86,23 +86,4 @@ export const getMovies = async (
     }
   }
 };
-//запрос на то ч то бы отоброзить подробное инфо о фильме
-export const getMovieDescription = async (id) => {
-  try {
-    const response = await fetch(
-      `https://www.omdbapi.com/?apikey=${API_KEY}&i=${id}`,
-    );
-    // console.log(responce);
-    if (!response.ok) {
-      throw new Error("Ошибка ответа с сервера");
-    }
-    const data = await response.json();
-    if (data.Response === "False") {
-      throw new Error("Не смогли найти этот фильм 😢");
-    } //кейс если пришло слишком много фильмов(ограничение Api)
-    return data;
-  } catch (error) {
-    console.log(error);
-    
-  }
-};
+

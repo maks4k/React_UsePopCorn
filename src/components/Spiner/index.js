@@ -1,1 +1,1 @@
-export {Spiner} from "./Spiner"
+export {Spiner} from "./ui/Spiner"

@@ -1,1 +1,1 @@
-export { MovieBlock } from "./MovieBlock";
+export { MovieBlock } from "./ui/MovieBlock";

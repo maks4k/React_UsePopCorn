@@ -1,9 +1,9 @@
 import React from 'react'
 
-export function Error() {
+export function Error({msg}) {
   return (
     <p className="error">
-    <span>⛔️Movie not found</span>
+    <span>⛔️{msg}</span>
   </p>
   )
 }
