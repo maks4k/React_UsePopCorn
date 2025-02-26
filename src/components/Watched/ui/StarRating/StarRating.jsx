@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Star } from "./Star";
 
-export function StarRating() {
-  const [rating, setRating] = useState(0);
+export function StarRating({rating,setRating}) {
+ 
   const [tempRating, setTempRating] = useState(rating); //фиксируем сколько звезд должно быть покрашенно
 
   return (

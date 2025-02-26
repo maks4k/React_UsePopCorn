@@ -1,5 +1,3 @@
-import React, { useState } from 'react'
-
 export function Star({fill,onHover,index,onMark}) {
   return (
     <div><svg
