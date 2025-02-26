@@ -1,18 +1,16 @@
 import React, { useState } from 'react'
 
-export function Star() {
-  const [tempRating,setTempRating]=useState();
-  const [move,setMove]=useState(false)
+export function Star({fill,onHover,index,onMark}) {
   return (
     <div><svg
-    onMouseEnter={()=>{
-      setMove(true);
-    }}
+    onMouseEnter={()=>onHover(index+1)}//рейтинг будет равен индекс +1 тк индекс начинается с 0
+    onMouseLeave={()=>onHover(0)}
+    onClick={()=>onMark(index+1)}
     width="23px"
     height="23px"
     viewBox="0 0 24 24"
     // fill={ind < rating || ind < tempRating ? fillColor : "none"}
-    fill={move?"gold":"transparent"}
+    fill={fill}
     xmlns="http://www.w3.org/2000/svg"
     style={{ cursor: "pointer" }}
   >

@@ -2,7 +2,7 @@
 // import { getMovieDescription } from "../../App/Api";
 import {Error} from "../../Error"
 import { Spiner } from "../../Spiner";
-import { StarRating } from "../../StarRating";
+import { StarRating } from "../ui/StarRating/StarRating";
 import { useGetMovieDescription } from "../model/useGetMovieDescription";
 
 // eslint-disable-next-line react/prop-types
