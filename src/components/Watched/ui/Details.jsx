@@ -1,17 +1,13 @@
-// import { useEffect, useState } from "react";
-// import { getMovieDescription } from "../../App/Api";
 import { Error } from "../../Error";
 import { Spiner } from "../../Spiner";
 import { StarRating } from "../ui/StarRating/StarRating";
 import { useGetMovieDescription } from "../model/useGetMovieDescription";
-import { useState } from "react";
+import { useMovieRating } from "../model/useMovieRating";
 
 export function Details({ id }) {
-  const [rating, setRating] = useState(0); //основной рейтинг
-  const [movies, setMovies] = useState([]); //пустой масив для каждого рейтинга
   const { description, isLoading, errorMsg } = useGetMovieDescription(id); //кастомный хук???
-  let MovieIndex = movies?.findIndex((movie) => movie.id === id);
-  //если isлодинг отрисуй спинер иначе отрису дискрипшен-дитаилс
+  const { rating, ratedMovies, MovieIndex, setRatedMovies, setRating } =
+    useMovieRating(id);//кастомный хук с рейтингом
   return isLoading ? (
     <div className="spiner__wrapper">
       <Spiner />
@@ -37,12 +33,13 @@ export function Details({ id }) {
       </header>
       <section>
         <div className="rating">
-       
-          <StarRating rating={rating} setRating={setRating} />
-          {!!rating && (
+          {MovieIndex == -1 && (
+            <StarRating rating={rating} setRating={setRating} />
+          )}
+          {!!rating && MovieIndex == -1 && (
             <button
               onClick={() => {
-                setMovies((prevMovies) => [
+                setRatedMovies((prevMovies) => [
                   ...prevMovies,
                   { id: id, rating: rating },
                 ]);
@@ -52,10 +49,10 @@ export function Details({ id }) {
               + Add to list
             </button>
           )}
-          {(MovieIndex!==-1) && (
+          {MovieIndex !== -1 && (
             <p>
               You rated with movie
-              {movies[MovieIndex]?.rating}
+              {ratedMovies[MovieIndex]?.rating}
               <span>⭐️</span>
             </p>
           )}
