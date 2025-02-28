@@ -96,7 +96,7 @@ const{
       <Navbar onSearch={searchHandler} numResults={numResults} />
       <main className="main">
         <MovieBlock isLoading={isLoading} isError={isError} movies={movies} activeMovie={activeMovie} setIsActiveMovie={setIsActiveMovie}/>
-        <WatchedBlock id={activeMovie} />
+        <WatchedBlock id={activeMovie} onSetIsActiveMovie={setIsActiveMovie} />
       </main>
     </>
   );

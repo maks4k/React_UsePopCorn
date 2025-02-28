@@ -4,10 +4,12 @@ import { StarRating } from "../ui/StarRating/StarRating";
 import { useGetMovieDescription } from "../model/useGetMovieDescription";
 import { useMovieRating } from "../model/useMovieRating";
 
-export function Details({ id }) {
+
+export function Details({ id,onResetVisibale }) {
   const { description, isLoading, errorMsg } = useGetMovieDescription(id); //кастомный хук???
   const { rating, ratedMovies, MovieIndex, setRatedMovies, setRating } =
     useMovieRating(id);//кастомный хук с рейтингом
+    
   return isLoading ? (
     <div className="spiner__wrapper">
       <Spiner />
@@ -17,7 +19,7 @@ export function Details({ id }) {
   ) : (
     <div className="details">
       <header>
-        <button className="btn-back">&larr;</button>
+        <button className="btn-back" onClick={()=>onResetVisibale(null)}>&larr;</button>
         <img src={description?.Poster} />
         <div className="details-overview">
           <h2>{description?.Title}</h2>
