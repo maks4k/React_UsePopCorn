@@ -5,10 +5,10 @@ import { useGetMovieDescription } from "../model/useGetMovieDescription";
 import { useMovieRating } from "../model/useMovieRating";
 
 
-export function Details({ id,onResetVisibale }) {
+export function Details({ id,onResetVisibale,setRatedMovies,ratedMovies }) {
   const { description, isLoading, errorMsg } = useGetMovieDescription(id); //кастомный хук???
-  const { rating, ratedMovies, MovieIndex, setRatedMovies, setRating } =
-    useMovieRating(id);//кастомный хук с рейтингом
+  const { rating, MovieIndex,setRating } =
+    useMovieRating(id,ratedMovies);//кастомный хук с рейтингом
     
   return isLoading ? (
     <div className="spiner__wrapper">
@@ -43,8 +43,8 @@ export function Details({ id,onResetVisibale }) {
               onClick={() => {
                 setRatedMovies((prevMovies) => [
                   ...prevMovies,
-                  { id: id, rating: rating },
-                ]);
+                  { id: id, rating: rating,title:description.Title,imdbRating:description.imdbRating,runtime:description.Runtime,poster:description.Poster },
+                ]);//сформировали новыйй объект для рейтинга при нажатие на звездочки и отображение дискрипшена инидивидуального при оценки фильма
               }}
               className="btn-add"
             >
