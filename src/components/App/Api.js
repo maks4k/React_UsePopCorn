@@ -81,7 +81,7 @@ export const getMovies = async (
     } //кейс если пришло слишком много фильмов(ограничение Api)
     return data;
   } catch (error) {
-    if (error.name === "AbbortError") {
+    if (error.name === "AbortError") {
       console.log("Предыдущий запрос отменен");
     }
   }
